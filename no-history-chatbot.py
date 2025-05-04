@@ -1,7 +1,7 @@
 import boto3
 import json
 
-client = boto3.client(service_name='bedrock_runtime', region_name='us-west-2')
+client = boto3.client(service_name='bedrock-runtime', region_name='us-west-2')
 
 def get_configuration(prompt:str):
     return json.dumps({
@@ -9,7 +9,7 @@ def get_configuration(prompt:str):
         "textGenerationConfig":{
             "maxTokenCount":4096,
             "stopSequences":[],
-            "temprature":0,
+            "temperature":0,
             "topP":1
         }
     })
@@ -17,7 +17,7 @@ def get_configuration(prompt:str):
 print("Bot : Hello! I am a chatbot. I can help you with anything you want to talk about.")
 
 while True:
-    user_input:input("User : ")
+    user_input = input("User : ")
     if user_input.lower() == "exit" :
         break
     response = client.invoke_model(
